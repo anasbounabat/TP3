@@ -1,9 +1,9 @@
 /**
  * Integration test for GET /version.
- * Focus: HTTP behavior & payload shape.
  */
 import request from 'supertest'
 import app from '../src/app.js'
+import { getPackageInfo } from '../src/utils/appInfo.js'
 import { describe, it, expect } from 'vitest'
 
 describe('GET /version', () => {
@@ -17,5 +17,10 @@ describe('GET /version', () => {
   it('responds with JSON content-type', async () => {
     const res = await request(app).get('/version')
     expect(res.headers['content-type']).toMatch(/application\/json/)
+  })
+
+  it('TD-5: matches the version declared in package.json', async () => {
+    const res = await request(app).get('/version')
+    expect(res.body).toEqual({ version: getPackageInfo().version })
   })
 })
