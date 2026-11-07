@@ -1,7 +1,3 @@
-/**
-
-Unit tests for src/utils/status.js.
-Covers every branch and the exact boundaries (0, 59, 60, 3599, 3600). */
 import { describe, it, expect } from 'vitest'
 import { formatStatus } from '../../src/utils/status.js'
 
